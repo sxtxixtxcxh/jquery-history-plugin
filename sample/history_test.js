@@ -31,9 +31,9 @@ $(document).ready(function() {
 	}
 	
 	$(".history-links a").click(function(){
-		var hash = this.href;
-		hash = hash.replace(/^.*#/, '');
-		Logger.append("[link clicked] href="+ this.href);
+		var href = $(this).attr('href');
+		hash = href.replace(/^.*?#/, '');
+		Logger.append("[link clicked] href="+ href);
 		loadHistory(hash);
 		return false;
 	    });
