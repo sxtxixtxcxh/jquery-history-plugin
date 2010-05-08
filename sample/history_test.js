@@ -14,7 +14,7 @@ $(document).ready(function() {
 	    $('#ie-info').text('You are using IE8 in version '+ document.documentMode +' compatible mode.');
 	}
 
-	$.historyInit(function (hash) {
+	$.history.init(function (hash) {
 		Logger.append("[callback called] hash="+ hash);
 		if(hash) {
 		    $("#load").text("loaded: "+ hash);
@@ -27,7 +27,7 @@ $(document).ready(function() {
 
 	function loadHistory(hash) {
 	    Logger.append('[load history] hash='+ hash);
-	    $.historyLoad(hash);
+	    $.history.load(hash);
 	}
 	
 	$(".history-links a").click(function(){

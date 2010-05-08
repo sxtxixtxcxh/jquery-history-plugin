@@ -27,11 +27,11 @@
         id: "__jQuery_history",
         init: function() {
             var html = '<iframe id="'+ this.id +'" style="display:none" src="javascript:false;" />';
-            jQuery("body").prepend(html);
+            $("body").prepend(html);
             return this;
         },
         _document: function() {
-            return jQuery("#"+ this.id)[0].contentWindow.document;
+            return $("#"+ this.id)[0].contentWindow.document;
         },
         put: function(hash) {
             var doc = this._document();
@@ -45,73 +45,73 @@
     };
 
     // public base interface
-    var HistoryBase = {
-        historyAppState: undefined,
-        historyCallback: undefined,
-        historyInit:  function(callback) {},
-        historyCheck: function() {},
-        historyLoad:  function(hash) {}
+    var _ = {
+        appState: undefined,
+        callback: undefined,
+        init:  function(callback) {},
+        check: function() {},
+        load:  function(hash) {}
     };
+    $.history = _;
 
     var SimpleImpl = {
-        historyInit: function(callback) {
-            jQuery.historyCallback = callback;
+        init: function(callback) {
+            _.callback = callback;
             var current_hash = locationWrapper.get();
-            jQuery.historyAppState = current_hash;
+            _.appState = current_hash;
             if(current_hash) {
-                jQuery.historyCallback(current_hash);
+                _.callback(current_hash);
             }
-            setInterval(jQuery.historyCheck, 100);
+            setInterval(_.check, 100);
         },
-        historyCheck: function() {
+        check: function() {
             var current_hash = locationWrapper.get();
-            if(current_hash != jQuery.historyAppState) {
-                jQuery.historyAppState = current_hash;
-                jQuery.historyCallback(current_hash);
+            if(current_hash != _.appState) {
+                _.appState = current_hash;
+                _.callback(current_hash);
             }
         },
-        historyLoad: function(hash) {
-            if(hash != jQuery.historyAppState) {
+        load: function(hash) {
+            if(hash != _.appState) {
                 locationWrapper.put(hash);
-                jQuery.historyAppState = hash;
-                jQuery.historyCallback(hash);
+                _.appState = hash;
+                _.callback(hash);
             }
         }
     };
 
     var IframeImpl = {
-        historyInit: function(callback) {
-            jQuery.historyCallback = callback;
+        init: function(callback) {
+            _.callback = callback;
             var current_hash = locationWrapper.get();
-            jQuery.historyAppState = current_hash;
+            _.appState = current_hash;
             iframeWrapper.init().put(current_hash);
             if(current_hash) {
-                jQuery.historyCallback(current_hash);
+                _.callback(current_hash);
             }
-            setInterval(jQuery.historyCheck, 100);
+            setInterval(_.check, 100);
         },
-        historyCheck: function() {
+        check: function() {
             var current_hash = iframeWrapper.get();
-            if(current_hash != jQuery.historyAppState) {
+            if(current_hash != _.appState) {
                 locationWrapper.put(current_hash);
-                jQuery.historyAppState = current_hash;
-                jQuery.historyCallback(current_hash);
+                _.appState = current_hash;
+                _.callback(current_hash);
             }
         },
-        historyLoad: function(hash) {
-            if(hash != jQuery.historyAppState) {
+        load: function(hash) {
+            if(hash != _.appState) {
                 locationWrapper.put(hash);
                 iframeWrapper.put(hash);
-                jQuery.historyAppState = hash;
-                jQuery.historyCallback(hash);
+                _.appState = hash;
+                _.callback(hash);
             }
         }
     };
 
-    jQuery.extend(HistoryBase);
     if(jQuery.browser.msie && (jQuery.browser.version < 8 || document.documentMode < 8)) {
-        jQuery.extend(IframeImpl);
+        jQuery.extend(_, IframeImpl);
     } else {
-        jQuery.extend(SimpleImpl);
+        jQuery.extend(_, SimpleImpl);
     }
 })(jQuery);
