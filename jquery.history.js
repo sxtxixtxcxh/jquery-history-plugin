@@ -71,20 +71,15 @@
             }
         },
         historyLoad: function(hash) {
-            var newhash = hash;
-            locationWrapper.put(newhash);
-            jQuery.historyCurrentHash = newhash;
+            locationWrapper.put(hash);
+            jQuery.historyCurrentHash = hash;
             jQuery.historyCallback(hash);
         }
     };
 
     var IframeImpl = {
-        historyIframeSrc: undefined,
-        historyInit: function(callback, src) {
+        historyInit: function(callback) {
             jQuery.historyCallback = callback;
-            if (src) {
-                jQuery.historyIframeSrc = src;
-            }
             var current_hash = locationWrapper.get();
             jQuery.historyCurrentHash = current_hash;
             iframeWrapper.init().put(current_hash);
@@ -102,13 +97,9 @@
             }
         },
         historyLoad: function(hash) {
-            var newhash = hash;
-
-            locationWrapper.put(newhash);
-            jQuery.historyCurrentHash = newhash;
-            iframeWrapper.put(newhash);
-
-            jQuery.lastHistoryLength = history.length;
+            locationWrapper.put(hash);
+            jQuery.historyCurrentHash = hash;
+            iframeWrapper.put(hash);
             jQuery.historyCallback(hash);
         }
     };
