@@ -46,7 +46,7 @@
 
     // public base interface
     var HistoryBase = {
-        historyCurrentHash: undefined,
+        historyAppState: undefined,
         historyCallback: undefined,
         historyInit:  function(callback) {},
         historyCheck: function() {},
@@ -57,7 +57,7 @@
         historyInit: function(callback) {
             jQuery.historyCallback = callback;
             var current_hash = locationWrapper.get();
-            jQuery.historyCurrentHash = current_hash;
+            jQuery.historyAppState = current_hash;
             if(current_hash) {
                 jQuery.historyCallback(current_hash);
             }
@@ -65,14 +65,14 @@
         },
         historyCheck: function() {
             var current_hash = locationWrapper.get();
-            if(current_hash != jQuery.historyCurrentHash) {
-                jQuery.historyCurrentHash = current_hash;
+            if(current_hash != jQuery.historyAppState) {
+                jQuery.historyAppState = current_hash;
                 jQuery.historyCallback(current_hash);
             }
         },
         historyLoad: function(hash) {
             locationWrapper.put(hash);
-            jQuery.historyCurrentHash = hash;
+            jQuery.historyAppState = hash;
             jQuery.historyCallback(hash);
         }
     };
@@ -81,7 +81,7 @@
         historyInit: function(callback) {
             jQuery.historyCallback = callback;
             var current_hash = locationWrapper.get();
-            jQuery.historyCurrentHash = current_hash;
+            jQuery.historyAppState = current_hash;
             iframeWrapper.init().put(current_hash);
             if(current_hash) {
                 jQuery.historyCallback(current_hash);
@@ -90,15 +90,15 @@
         },
         historyCheck: function() {
             var current_hash = iframeWrapper.get();
-            if(current_hash != jQuery.historyCurrentHash) {
+            if(current_hash != jQuery.historyAppState) {
                 locationWrapper.put(current_hash);
-                jQuery.historyCurrentHash = current_hash;
+                jQuery.historyAppState = current_hash;
                 jQuery.historyCallback(current_hash);
             }
         },
         historyLoad: function(hash) {
             locationWrapper.put(hash);
-            jQuery.historyCurrentHash = hash;
+            jQuery.historyAppState = hash;
             iframeWrapper.put(hash);
             jQuery.historyCallback(hash);
         }
