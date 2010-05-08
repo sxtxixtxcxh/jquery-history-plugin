@@ -109,9 +109,9 @@
         }
     };
 
-    if(jQuery.browser.msie && (jQuery.browser.version < 8 || document.documentMode < 8)) {
-        jQuery.extend(_, IframeImpl);
+    if($.browser.msie && ($.browser.version < 8 || document.documentMode < 8)) {
+        $.extend(_, IframeImpl);
     } else {
-        jQuery.extend(_, SimpleImpl);
+        $.extend(_, SimpleImpl);
     }
 })(jQuery);
