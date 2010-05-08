@@ -71,9 +71,11 @@
             }
         },
         historyLoad: function(hash) {
-            locationWrapper.put(hash);
-            jQuery.historyAppState = hash;
-            jQuery.historyCallback(hash);
+            if(hash != jQuery.historyAppState) {
+                locationWrapper.put(hash);
+                jQuery.historyAppState = hash;
+                jQuery.historyCallback(hash);
+            }
         }
     };
 
@@ -97,10 +99,12 @@
             }
         },
         historyLoad: function(hash) {
-            locationWrapper.put(hash);
-            jQuery.historyAppState = hash;
-            iframeWrapper.put(hash);
-            jQuery.historyCallback(hash);
+            if(hash != jQuery.historyAppState) {
+                locationWrapper.put(hash);
+                iframeWrapper.put(hash);
+                jQuery.historyAppState = hash;
+                jQuery.historyCallback(hash);
+            }
         }
     };
 
