@@ -23,6 +23,27 @@
         }
     };
 
+    var iframeWrapper = {
+        id: "__jQuery_history",
+        init: function() {
+            var html = '<iframe id="'+ this.id +'" style="display:none" src="javascript:false;" />';
+            jQuery("body").prepend(html);
+            return this;
+        },
+        _document: function() {
+            return jQuery("#"+ this.id)[0].contentWindow.document;
+        },
+        put: function(hash) {
+            var doc = this._document();
+            doc.open();
+            doc.close();
+            locationWrapper.put(hash, doc);
+        },
+        get: function() {
+            return locationWrapper.get(this._document());
+        }
+    };
+
     // public base interface
     var HistoryBase = {
         historyCurrentHash: undefined,
@@ -66,26 +87,14 @@
             }
             var current_hash = locationWrapper.get();
             jQuery.historyCurrentHash = current_hash;
-
-            // add hidden iframe for IE
-            jQuery("body").prepend('<iframe id="jQuery_history" style="display: none;"'+
-                                   ' src="javascript:false;"></iframe>');
-            var ihistory = jQuery("#jQuery_history")[0];
-            var iframe = ihistory.contentWindow.document;
-            iframe.open();
-            iframe.close();
-            locationWrapper.put(current_hash, iframe);
-
+            iframeWrapper.init().put(current_hash);
             if(current_hash) {
                 jQuery.historyCallback(current_hash);
             }
             setInterval(jQuery.historyCheck, 100);
         },
         historyCheck: function() {
-            // On IE, check for location.hash of iframe
-            var ihistory = jQuery("#jQuery_history")[0];
-            var iframe = ihistory.contentDocument || ihistory.contentWindow.document;
-            var current_hash = locationWrapper.get(iframe);
+            var current_hash = iframeWrapper.get();
             if(current_hash != jQuery.historyCurrentHash) {
                 locationWrapper.put(current_hash);
                 jQuery.historyCurrentHash = current_hash;
@@ -94,14 +103,11 @@
         },
         historyLoad: function(hash) {
             var newhash = hash;
-            locationWrapper.put(newhash);
 
+            locationWrapper.put(newhash);
             jQuery.historyCurrentHash = newhash;
-            var ihistory = jQuery("#jQuery_history")[0];
-            var iframe = ihistory.contentWindow.document;
-            iframe.open();
-            iframe.close();
-            locationWrapper.put(newhash, iframe);
+            iframeWrapper.put(newhash);
+
             jQuery.lastHistoryLength = history.length;
             jQuery.historyCallback(hash);
         }
