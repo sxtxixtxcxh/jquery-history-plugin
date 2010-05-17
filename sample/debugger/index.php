@@ -27,7 +27,7 @@ function jsWithTimestamp($file) {
 }
 
 function jQuerySelector() {
-    $jqueries = glob("./jquery/*.js");
+    $jqueries = glob("../jquery/*.js");
     if(count($jqueries) == 0) {
         error("No jquery found in jquery/.");
     }
@@ -69,8 +69,8 @@ echo empty($dtd) ? "" : $dtd . "\n";
     <?php echo $header ?>
   <title>jQuery History Plugin Test</title>
   <script type="text/javascript" src="<?php echo $jquery ?>"></script>
-    <?PHP echo jsWithTimestamp('../jquery.history.js') ?>
-    <?PHP echo jsWithTimestamp('./history_test.js') ?>
+    <?PHP echo jsWithTimestamp('../../jquery.history.js') ?>
+    <?PHP echo jsWithTimestamp('./debugger.js') ?>
 </head>
 <body>
     <form action="">
