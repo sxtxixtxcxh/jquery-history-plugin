@@ -59,9 +59,7 @@
             _.callback = callback;
             var current_hash = locationWrapper.get();
             _.appState = current_hash;
-            if(current_hash) {
-                _.callback(current_hash);
-            }
+            _.callback(current_hash);
             setInterval(_.check, 100);
         },
         check: function() {
@@ -86,9 +84,7 @@
             var current_hash = locationWrapper.get();
             _.appState = current_hash;
             iframeWrapper.init().put(current_hash);
-            if(current_hash) {
-                _.callback(current_hash);
-            }
+            _.callback(current_hash);
             setInterval(_.check, 100);
         },
         check: function() {
