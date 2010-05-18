@@ -7,8 +7,12 @@ You can save the application state to the URL hash values.
 
 IE6, IE7, IE8, Firefox3, Safari4, Chrome4, and Chrome5
 
+## Samples
+
+Samples are included in the samples/ directory and also available at [here](http://www.serpere.info/jquery-history-plugin/samples/).
+
 ## Authors
 
-Originaly developed by Taku Sano (Mikage Sawatari). (http://www.mikage.to/jquery/jquery_history.html)
+Originaly developed by Taku Sano (Mikage Sawatari). [www.mikage.to](http://www.mikage.to/jquery/jquery_history.html)
 
-And forked by Takayuki Miwa. (http://github.com/tkyk/)
+And forked by Takayuki Miwa. [github/tkyk](http://github.com/tkyk/)
