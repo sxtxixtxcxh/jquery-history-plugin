@@ -78,8 +78,7 @@ echo empty($dtd) ? "" : $dtd . "\n";
     IE Mode: <select name="ie_mode"><?php echo buildSelector($modes, $ie_mode) ?></select>
     <input type="submit" value="change" />
     </form>
-  <h1>jQuery History Plugin Test</h1>
-  <p>[<a href="http://www.mikage.to/jquery/jquery_history.html">jQuery history official site</a>]</p>
+  <h1>jQuery History Plugin Debugger Sample</h1>
 
   <div id="ie-info"></div>
   <ul class="history-links">
@@ -94,5 +93,7 @@ echo empty($dtd) ? "" : $dtd . "\n";
   <p><button onclick="history.back()">history.back()</button></p>
   <textarea id="history-log" style="font-size: 12px; font-family: monospace; width: 800px; height: 100px;">log
 </textarea>
+  <hr />
+  <p>[<a href="../">All samples</a>] [<a href="http://github.com/tkyk/jquery-history-plugin">Project home</a>]</p>
 </body>
 </html>
