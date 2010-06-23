@@ -5,11 +5,15 @@ You can save the application state to the URL hash values.
 
 ## Supported Browsers
 
-IE6, IE7, IE8, Firefox3, Safari4, Chrome4, and Chrome5
+IE6, IE7, IE8, Firefox3, Safari4, Safari5, Chrome4, and Chrome5
 
 ## Samples
 
 Samples are included in the samples/ directory and also available at [here](http://www.serpere.info/jquery-history-plugin/samples/).
+
+## Documentations
+
+- [jQuery-history-plugin wiki](http://wiki.github.com/tkyk/jquery-history-plugin/)
 
 ## Authors
 
