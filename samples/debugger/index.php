@@ -87,6 +87,7 @@ echo empty($dtd) ? "" : $dtd . "\n";
   <li><a href="#3">load 3</a></li>
   <li><a href="#åäö">load åäö</a></li>
   <li><a href="#+:/;,???abc=/xyz/&amp;def">load +:/;,???abc=/xyz/&amp;def</a></li>
+  <li><a href="#%2525">load %2525</a></li>
   <li><input id="hash-input" size="20" /><input type="button" id="load-hash" value="load hash" /></li>
   </ul>
   <div id="load"></div>
