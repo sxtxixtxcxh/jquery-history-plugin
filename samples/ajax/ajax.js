@@ -11,7 +11,6 @@ jQuery(document).ready(function($) {
         $('#ajax-links a').live('click', function(e) {
                 var url = $(this).attr('href');
                 url = url.replace(/^.*#/, '');
-                load(url);
                 $.history.load(url);
                 return false;
             });
